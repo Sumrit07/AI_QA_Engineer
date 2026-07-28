@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI QA Engineer</title>
+
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="icon" href="/static/favicon.ico">
+
+</head>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="/static/js/config.js"></script>
+<script src="/static/js/sidebar.js"></script>
+<script src="/static/js/dashboard.js"></script>
+<script src="/static/js/upload.js"></script>
+<script src="/static/js/history.js"></script>
+<script src="/static/js/charts.js"></script>
+<script src="/static/js/analysis.js"></script>
+
+<body>
+
+<!-- ===========================
+        SIDEBAR
+=========================== -->
+
+<div class="sidebar">
+
+    <div class="logo">
+        <h2>🤖 AI QA</h2>
+    </div>
+
+    <ul id="sidebarMenu">
+
+        <li class="active" data-target="dashboardSection">
+            🏠 Dashboard
+        </li>
+
+        <li data-target="uploadSection">
+            📂 Upload Project
+        </li>
+
+        <li data-target="analysisSection">
+            ⚡ Analysis
+        </li>
+
+        <li data-target="reportSection">
+            📄 Final Report
+        </li>
+
+        <li data-target="bugSection">
+            🐞 Bugs
+        </li>
+
+        <li data-target="securitySection">
+            🔒 Security
+        </li>
+
+        <li data-target="performanceSection">
+            ⚡ Performance
+        </li>
+
+        <li data-target="smellSection">
+            🧹 Code Smells
+        </li>
+
+        <li data-target="historySection">
+            🕒 History
+        </li>
+
+        <li id="logoutBtn">
+            🚪 Logout
+        </li>
+
+    </ul>
+
+</div>
+
+<!-- ===========================
+        MAIN
+=========================== -->
+
+<div class="main">
+
+<!-- ===========================
+        TOPBAR
+=========================== -->
+
+<div class="topbar">
+
+    <h1>
+
+        AI QA Dashboard
+
+    </h1>
+
+    <div class="top-right">
+
+        <input
+            type="text"
+            id="historySearch"
+            placeholder="Search Project">
+
+        <button id="themeBtn">
+
+            🌙
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ===========================
+        DASHBOARD
+=========================== -->
+
+<section id="dashboardSection">
+
+<div class="welcome-card">
+
+    <div>
+
+        <h2>
+
+            Welcome Back 👋
+
+        </h2>
+
+        <p>
+
+            AI Powered Software Quality Assurance Platform
+
+        </p>
+
+    </div>
+
+    <button id="startAnalysis">
+
+        ▶ Start Analysis
+
+    </button>
+
+</div>
+
+<!-- ===========================
+        CARDS
+=========================== -->
+
+<div class="cards">
+
+<div class="card">
+
+<h3>Quality Score</h3>
+
+<h1 id="qualityScore">--</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Security Score</h3>
+
+<h1 id="securityScore">--</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Coverage</h3>
+
+<h1 id="coverage">--</h1>
+
+</div>
+
+<div class="card">
+
+<h3>Current Bugs</h3>
+
+<h1 id="bugs">--</h1>
+
+</div>
+
+</div>
+
+</section>
+
+<h2 style="margin-top:30px;"></h2>
+
+<div class="cards">
+
+    <div class="card">
+        <h3>Total Projects</h3>
+        <h1 id="totalProjects">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Total Reports</h3>
+        <h1 id="totalReports">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Average Score</h3>
+        <h1 id="averageScore">0</h1>
+    </div>
+
+    <div class="card">
+        <h3>Last Scan</h3>
+        <h1 id="lastScan">0</h1>
+    </div>
+
+
+</div>
+
+<!-- ===========================
+        UPLOAD
+=========================== -->
+
+<section id="uploadSection">
+
+<div class="upload-box">
+
+<h2>
+
+📂 Upload Project
+
+</h2>
+
+<input
+type="file"
+id="zipFile"
+accept=".zip">
+
+<button id="uploadBtn">
+
+Upload ZIP
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        ANALYSIS
+=========================== -->
+
+<section id="analysisSection">
+
+<div class="progress-box">
+
+<h2>
+
+Analysis Progress
+
+</h2>
+
+<div class="progress">
+
+<div id="progressBar"></div>
+
+</div>
+
+<p id="progressText">
+
+Waiting...
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        REPORT
+=========================== -->
+
+<section id="reportSection">
+
+<div class="report-box">
+
+<h2>
+
+📄 Final Report
+
+</h2>
+
+<pre id="report">
+
+No Report Generated
+
+</pre>
+
+</div>
+
+<br>
+
+<div class="report-box">
+
+<h2>
+
+📋 Executive Summary
+
+</h2>
+
+<p id="executiveSummary">
+
+No Summary
+
+</p>
+
+</div>
+
+<br>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>
+
+Project Status
+
+</h3>
+
+<h2 id="projectStatus">
+
+--
+
+</h2>
+
+</div>
+
+</div>
+
+<br>
+
+<div class="report-box">
+
+<h2>
+
+💡 Recommendations
+
+</h2>
+
+<ul id="recommendationList">
+
+<li>
+
+No Recommendations
+
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- ===========================
+        CHARTS
+=========================== -->
+
+<section id="chartsSection">
+
+<div class="charts">
+
+<div class="chart-card">
+
+<h2>🐞 Bug Distribution</h2>
+
+<canvas id="bugChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h2>⭐ Project Quality</h2>
+
+<canvas id="qualityChart"></canvas>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        BUGS
+=========================== -->
+
+<section id="bugSection">
+
+<div class="bug-section">
+
+<h2>🐞 Bugs Detected</h2>
+
+<div style="margin:15px 0;">
+    
+    <button id="autoFixBtn">
+        🛠 Auto Fix Entire Project
+    </button>
+
+    <button id="downloadFixedBtn">
+
+        📥 Download Fixed Project ZIP
+
+    </button>
+
+</div>
+
+
+
+<table id="bugTable">
+
+<thead>
+
+<tr>
+
+<th>File</th>
+<th>Bug</th>
+<th>Severity</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="3" style="text-align:center">
+
+No Data
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        SECURITY
+=========================== -->
+
+<section id="securitySection">
+
+<div class="security-section">
+
+<h2>🔒 Security Issues</h2>
+
+<table id="securityTable">
+
+<thead>
+
+<tr>
+
+<th>File</th>
+<th>Issue</th>
+<th>Risk</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="3" style="text-align:center">
+
+No Data
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        PERFORMANCE
+=========================== -->
+
+<section id="performanceSection">
+
+<div class="performance-section">
+
+<h2>⚡ Performance</h2>
+
+<table id="performanceTable">
+
+<thead>
+
+<tr>
+
+<th>File</th>
+<th>Optimization</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="2" style="text-align:center">
+
+No Data
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        CODE SMELLS
+=========================== -->
+
+<section id="smellSection">
+
+<div class="smell-section">
+
+<h2>🧹 Code Smells</h2>
+
+<table id="smellTable">
+
+<thead>
+
+<tr>
+
+<th>File</th>
+<th>Smell</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="2" style="text-align:center">
+
+No Data
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        HISTORY
+=========================== -->
+
+<section id="historySection">
+
+<div class="history-section">
+
+<h2>🕒 Analysis History</h2>
+
+
+<table id="historyTable">
+
+<thead>
+
+<tr>
+
+<th>Project</th>
+<th>Score</th>
+<th>Coverage</th>
+<th>Total Files</th>
+<th>Date</th>
+<th>Action</th>
+<th>View</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td colspan="6" style="text-align:center">
+
+No Analysis History
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ===========================
+        DOWNLOAD PDF
+=========================== -->
+
+<div class="download-section">
+
+<button id="downloadPdf">
+
+📄 Download PDF Report
+
+</button>
+
+</div>
+
+</div>
+
+
+</body>
+
+</html>
