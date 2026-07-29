@@ -17,7 +17,7 @@ async function loadDashboard() {
     try {
 
         // Latest Report
-        const reportResponse = await fetch("http://127.0.0.1:8000/reports/", {
+        const reportResponse =await fetch(`${API}/reports/`, {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
@@ -67,7 +67,7 @@ async function loadDashboard() {
 
         // Dashboard Stats
         const statsResponse = await fetch(
-            "http://127.0.0.1:8000/dashboard/stats",
+            `${API}/dashboard/stats`,
             {
                 headers: {
                     "Authorization": `Bearer ${token}`
