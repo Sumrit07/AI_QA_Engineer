@@ -24,11 +24,6 @@ htmlcov/
 *.log
 logs/
 
-# Generated Reports
-reports/
-
-# Generated Fixed Projects
-fixed_projects/
 
 # Uploaded Projects
 projects/
